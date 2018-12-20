@@ -10,4 +10,8 @@ public class MyUserLOginService {
     public boolean login(MyUserLogin myUserLogin) {
         return myUserLoginDao.login(myUserLogin);
     }
+
+    public boolean register(MyUserLogin myUserLogin) {
+        return myUserLoginDao.register(myUserLogin);
+    }
 }

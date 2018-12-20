@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="javaweb-bbs">
+    <output-path>$PROJECT_DIR$/out/artifacts/javaweb_bbs</output-path>
+    <root id="archive" name="javaweb-bbs.war">
+      <element id="artifact" artifact-name="Web期末:war exploded" />
+    </root>
+  </artifact>
+</component>

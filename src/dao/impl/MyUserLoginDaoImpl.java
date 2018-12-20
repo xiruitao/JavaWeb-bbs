@@ -35,4 +35,25 @@ public class MyUserLoginDaoImpl implements MyUserLoginDao {
         }
         return false;
     }
+
+    @Override
+    public boolean register(MyUserLogin myUserLogin) {
+        Connection con = JDBCUtil.getConnection();
+        PreparedStatement pstmt = null;
+        String sql = "insert into user_log_p(account, password) values(?,?)";
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, myUserLogin.getAccount());
+            pstmt.setString(2, myUserLogin.getPassword());
+            int rs = pstmt.executeUpdate();
+            if (rs > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
