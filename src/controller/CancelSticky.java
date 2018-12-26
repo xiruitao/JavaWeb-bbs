@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static java.lang.System.out;
-
 public class CancelSticky extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -22,13 +20,11 @@ public class CancelSticky extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection conn = JDBCUtil.getConnection();
-
         String id1 = request.getParameter("post_id");//发出取消置顶的帖子(属于置顶的帖子)的ID
-        int id = 0;
         if (id1 == null || id1.equals("")) {
             response.getWriter().println(ResJson.generateResJson(-1, "null", "none"));
         }else{
-            id = Integer.parseInt(id1);
+            int id = Integer.parseInt(id1);
             try{
                 //查询发出请求帖子的置顶键值
                 String sql1="select pos_value from post where post_id='"+id+"';";
@@ -71,7 +67,7 @@ public class CancelSticky extends HttpServlet {
                             ++num;
                         }
                     }
-                    System.out.println("num="+num);
+//                    System.out.println("num="+num);
                     int number=list.size()/2;
                     if(num==number){
                         String sql="update post set pos_value='"+0+"' where post_id='"+id+"';";

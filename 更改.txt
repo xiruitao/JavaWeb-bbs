@@ -1,0 +1,45 @@
+按类返回普通帖（非加精）（非需求帖）
+get: /getPostByCategory
+response.getWriter().println(ResJson.generateResJson(-1, "null", "none"));
+response.getWriter().println(ResJson.generateResJson(0, "Such posts are demand posts", "none"));
+out.println(ResJson.generateResJson(1,"该类帖子信息(未置顶、未加精)",data));
+
+按类返回普通帖（加精）（非需求帖）
+get: /getEditingPostByCategory
+response.getWriter().println(ResJson.generateResJson(-1, "null", "none"));
+response.getWriter().println(ResJson.generateResJson(0, "Such posts are demand posts", "none"));
+out.println(ResJson.generateResJson(1,"该类帖子信息(未置顶、加精)",data));
+
+加精操作添加了判断是否已加精：
+if(is_refinement==1){//如果帖子已经加精
+    response.getWriter().println(ResJson.generateResJson(2, "Already Editing", "none"));
+}
+
+置顶操作添加了判断是否已置顶：
+if (post_value>0){//如果帖子已经置顶
+    response.getWriter().println(ResJson.generateResJson(2, "Already Sticky","none" ));
+}
+
+其他返回普通帖、加精帖、置顶帖均添加了条件非需求帖
+
+-----------------------------------------------------------------------------------
+以下为再次更改
+-----------------------------------------------------------------------------------
+
+将以上第一个接口删除，功能加入/getPost
+使之实现无参数传递过来时获取非置顶帖，有参数（category_id）传递过来时则获取该类帖子信息。
+无参数传递：
+1,"贴吧帖子信息(未置顶)",data1
+有参数传递：
+(0, "这个类别是需求帖，不做操作", "none")
+(2, "该类别暂时还没有帖子", "none")
+(1,"该类帖子信息(未置顶)",data)
+
+将以上第二个接口删除，功能加入/getEditingPost
+使之实现无参数传递过来时获取加精非置顶帖，有参数（category_id）传递过来时则获取该类加精的帖子信息。
+无参数传递：
+1,"贴吧加精帖子信息(未置顶)",data1
+有参数传递：
+(0, "这个类别是需求帖，不做操作", "none")
+(2, "该类别暂时还没有帖子", "none")
+(1,"该类帖子信息(未置顶，加精)",data)

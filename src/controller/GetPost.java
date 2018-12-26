@@ -1,5 +1,6 @@
 package controller;
 
+import dao.JDBCUtil;
 import dao.ResJson;
 import org.json.JSONObject;
 import service.PostService;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GetPost extends HttpServlet {
@@ -19,10 +23,57 @@ public class GetPost extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out=response.getWriter();
-        PostService postService=new PostService();
-        ArrayList<Post> posts=postService.findAll();
-        JSONObject data=new JSONObject();
-        data.put("posts",posts);
-        out.println(ResJson.generateResJson(1,"贴吧帖子信息(未置顶)",data));
+        String id1 = request.getParameter("category_id");//请求该分类帖子的类别ID
+        if (id1 == null || id1.equals("")) {
+            PostService postService=new PostService();
+            ArrayList<Post> posts=postService.findAll();
+            JSONObject data1=new JSONObject();
+            data1.put("posts",posts);
+            out.println(ResJson.generateResJson(1,"贴吧帖子信息(未置顶)",data1));
+        } else{
+            int id = Integer.parseInt(id1);
+            if(id==1005){
+                response.getWriter().println(ResJson.generateResJson(0, "这个类别是需求帖，不做操作", "none"));
+            }else{
+                JSONObject data=new JSONObject();
+                Connection conn= JDBCUtil.getConnection();
+                ArrayList<Post> PostByCategory=new ArrayList<Post>();
+                try{
+                    String sql="select * from post where pos_value=0 and category_id="+id+" ;";
+                    Statement sta=conn.createStatement();
+                    ResultSet rs=sta.executeQuery(sql);
+                    while(rs.next()){
+                        Post post=new Post();
+                        int post_id=rs.getInt("post_id");
+                        int category_id=rs.getInt("category_id");
+                        String post_title=rs.getString("post_title");
+                        String post_content=rs.getString("post_content");
+                        String account=rs.getString("account");
+                        String image=rs.getString("image");
+                        int pos_value=rs.getInt("pos_value");
+                        int is_refinement=rs.getInt("is_refinement");
+                        String post_time=rs.getString("post_time");
+                        post.setPost_id(post_id);
+                        post.setCategory_id(category_id);
+                        post.setPost_title(post_title);
+                        post.setPost_content(post_content);
+                        post.setAccount(account);
+                        post.setImage(image);
+                        post.setPos_value(pos_value);
+                        post.setIs_refinement(is_refinement);
+                        post.setPost_time(post_time);
+                        PostByCategory.add(post);
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(PostByCategory.size()==0){
+                    response.getWriter().println(ResJson.generateResJson(2, "该类别暂时还没有帖子", "none"));
+                }else {
+                    data.put("posts",PostByCategory);
+                    out.println(ResJson.generateResJson(1,"该类帖子信息(未置顶)",data));
+                }
+            }
+        }
     }
 }

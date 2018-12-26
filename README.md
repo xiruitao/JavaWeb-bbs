@@ -1,6 +1,12 @@
-#### 获取帖子（未置顶）信息  get：GetPost
+#### 获取(全部或某类)帖子（未置顶）信息  get：/getPost
 
-##### req:  null
+##### req:  
+
+> {
+>
+> "category_id" : xxx
+>
+> }
 
 ##### res:
 
@@ -36,9 +42,15 @@
 >
 > ​    ]
 >
+> "message":  "这个类别是需求帖，不做操作"" / "贴吧帖子信息(未置顶)" / 
+>
+> ​                      "该类帖子信息(未置顶)" / "该类别暂时还没有帖子"
+>
+> "status":  0 / 1 / 2
+>
 > }
 
-#### 获取置顶帖子信息  get:  GetStickyPost
+#### 获取置顶帖子信息  get:  /getStickyPost
 
 ##### req:  null
 
@@ -78,9 +90,15 @@
 >
 >}
 
-#### 获取加精帖子信息  get:  GetEditingPost
+#### 获取(全部或某类)加精帖子信息  get:  /getEditingPost
 
-##### req:  null
+##### req:  
+
+> {
+>
+> "category_id" : xxx
+>
+> }
 
 ##### res:
 
@@ -116,9 +134,15 @@
 >
 >]
 >
+>"message":  "这个类别是需求帖，不做操作"" / "贴吧加精帖子(未置顶)信息" / 
+>
+>​                      "该类帖子信息(未置顶、加精)" / "该类别暂时还没有帖子"
+>
+>"status":  0 / 1 / 2
+>
 >}
 
-#### 帖子置顶  get:  DoPostSticky
+#### 帖子置顶  get:  /doPostSticky
 
 ##### req:
 
@@ -134,13 +158,13 @@
 >
 >"data":  "none" / "post_id"
 >
->"message":  null" / "Sticky Successful" / "Sticky Usuccessful"
+>"message":  null" / "Sticky Successful" / "Sticky Usuccessful" / "Already Sticky"
 >
->"status":  -1 / 1 / 0
+>"status":  -1 / 1 / 0 / 2
 >
 >}
 
-#### 帖子加精  get:  DoPostEditing
+#### 帖子加精  get:  /doPostEditing
 
 ##### req:
 
@@ -156,13 +180,13 @@
 >
 > "data":  "none" / "post_id"
 >
-> "message":  null" / "Editing Successful" / "Editing Usuccessful"
+> "message":  null" / "Editing Successful" / "Editing Usuccessful" / "Already Editing"
 >
-> "status":  -1 / 1 / 0
+> "status":  -1 / 1 / 0 / 2
 >
 > }
 
-#### 置顶帖中帖子上移  get:  MoveUpPost
+#### 置顶帖中帖子上移  get:  /moveUpPost
 
 ##### req:
 
@@ -184,7 +208,7 @@
 >
 > }
 
-#### 置顶帖中帖子下移  get:  MoveDownPost
+#### 置顶帖中帖子下移  get:  /moveDownPost
 
 ##### req:
 
@@ -206,7 +230,7 @@
 >
 > }
 
-#### 取消置顶  get:  CancelSticky
+#### 取消置顶  get:  /cancelSticky
 
 ##### req:
 
@@ -228,7 +252,7 @@
 >
 > }
 
-#### 取消加精  get:  CancelEditing
+#### 取消加精  get:  /cancelEditing
 
 ##### req:
 
@@ -250,3 +274,4 @@
 >
 > }
 
+>

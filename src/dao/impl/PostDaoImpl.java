@@ -13,9 +13,9 @@ public class PostDaoImpl implements PostDao {
     @Override
     public ArrayList<Post> findAll() {
         Connection conn= JDBCUtil.getConnection();
-        ArrayList<Post> Post_informaiton=new ArrayList<Post>();
+        ArrayList<Post> Post_information=new ArrayList<Post>();
         try{
-            String sql="select * from post where pos_value='0' order by post_time desc";
+            String sql="select * from post where pos_value='0' and category_id<>1005 order by post_time desc";
             Statement sta=conn.createStatement();
             ResultSet rs=sta.executeQuery(sql);
             while(rs.next())
@@ -39,14 +39,14 @@ public class PostDaoImpl implements PostDao {
                 post.setPos_value(pos_value);
                 post.setIs_refinement(is_refinement);
                 post.setPost_time(post_time);
-                Post_informaiton.add(post);
+                Post_information.add(post);
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        return Post_informaiton;
+        return Post_information;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PostDaoImpl implements PostDao {
         Connection conn= JDBCUtil.getConnection();
         ArrayList<Post> Post_sticky=new ArrayList<Post>();
         try{
-            String sql="select * from post where pos_value>0 order by pos_value desc";
+            String sql="select * from post where pos_value>0 and category_id<>1005 order by pos_value desc";
             Statement sta=conn.createStatement();
             ResultSet rs=sta.executeQuery(sql);
             while(rs.next())
@@ -93,7 +93,7 @@ public class PostDaoImpl implements PostDao {
         Connection conn= JDBCUtil.getConnection();
         ArrayList<Post> Post_editing=new ArrayList<Post>();
         try{
-            String sql="select * from post where is_refinement='1'";
+            String sql="select * from post where is_refinement='1' and pos_value='0' and category_id<>1005";
             Statement sta=conn.createStatement();
             ResultSet rs=sta.executeQuery(sql);
             while(rs.next())

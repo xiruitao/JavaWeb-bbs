@@ -18,7 +18,7 @@ public class CancelEditing extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection conn= JDBCUtil.getConnection();
         String id1 = request.getParameter("post_id");//发出取消加精请求的帖子的ID
-        int id = 0;
+        int id;
         if (id1 == null || id1.equals("")) {
             response.getWriter().println(ResJson.generateResJson(-1, "null", "none"));
         } else {
