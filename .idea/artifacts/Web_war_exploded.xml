@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="Web期末:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Web_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Web期末" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/json-20180813.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jjwt-api-0.10.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jjwt-impl-0.10.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jackson-core-2.9.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jjwt-jackson-0.10.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/protobuf-java-2.6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jackson-databind-2.9.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/jackson-annotations-2.9.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/mysql-connector-java-8.0.12.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Web期末/web/Web" />
+    </root>
+  </artifact>
+</component>
