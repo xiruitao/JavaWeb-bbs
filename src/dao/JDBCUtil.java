@@ -3,9 +3,9 @@ package dao;
 import java.sql.*;
 public class JDBCUtil {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://119.29.150.121:3306/studydb?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
-    static final String USER = "javaweb";
-    static final String PASS = "password";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/studydb?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
+    static final String USER = "fyy";
+    static final String PASS = "123Fuyingyou";
     public static Connection getConnection() {
         Connection conn = null;
         try {

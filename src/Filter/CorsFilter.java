@@ -13,7 +13,7 @@ public class CorsFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) resp;
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "*");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type，x-requested-with");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type,x-requested-with");
         res.setCharacterEncoding("UTF-8");
         res.setContentType("application/json");
         chain.doFilter(req, res);
